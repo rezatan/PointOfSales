@@ -133,21 +133,21 @@
       </li>
       <li class="nav-item dropdown user-menu">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-        <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2" alt="User Image">
+        <img src="{{ url(auth()->user()->photo ?? '') }}" class="user-image img-circle elevation-2 img-profile" alt="User Image">
         <span class="d-none d-md-inline"> 
             {{ auth()->user()->name }}
         </span>  
         </a>
       <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <li class="user-header card-header">
-        <img src="{{ asset('adminlte/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="admin">
+        <img src="{{ url(auth()->user()->photo ?? '') }}" class="img-circle elevation-2 img-profile" alt="admin">
           <p class="">
             {{ auth()->user()->name }}
             <small>{{ auth()->user()->email }}</small>
           </p>
         </li>
         <li class="user-footer card-footer">
-          <a href="#" class="btn btn-default btn-flat">
+          <a href="/profile" class="btn btn-default btn-flat">
             <i class="fa fa-fw fa-user text-lightblue"></i>
             Profile
           </a>

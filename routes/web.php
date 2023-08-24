@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
@@ -38,7 +39,9 @@ Route::middleware('auth')->group(function() {
     
     Route::resource('/product/category', CategoryController::class);
     Route::resource('/product', ProductController::class);
-    Route::resource('stock', StockController::class);
-    Route::resource('supplier', SupplierController::class);
+    Route::resource('/stock', StockController::class);
+    Route::resource('/supplier', SupplierController::class);
 
+    Route::get('/profile', [UserController::class, 'profile']);
+    Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
 });

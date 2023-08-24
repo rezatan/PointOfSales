@@ -97,6 +97,12 @@
 
 <!-- Validator -->
 <script src="{{ asset('js/validator.min.js') }}"></script>
+<script>
+  function preview(selector, temporaryFile, width = 200)  {
+      $(selector).empty();
+      $(selector).append(`<img src="${window.URL.createObjectURL(temporaryFile)}" width="${width}">`);
+  }
+</script>
 @stack('scripts')
 </body>
 </html>
