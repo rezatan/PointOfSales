@@ -14,7 +14,12 @@ return new class extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id');
+            $table->foreignId('supplier_id');
+            $table->string('code');
             $table->unsignedInteger('qty');
+            $table->integer('buy_price');
+            $table->integer('sell_price');
+            $table->tinyInteger('disc')->default(0);
             $table->timestamps();
         });
     }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Supplier;
+
 use Illuminate\Http\Request;
 use DataTables;
 
-class CategoryController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class CategoryController extends Controller
         if ($request->ajax()){
             return $this->data();
         }
-        return view('dashboard.category.index');
+        return view('dashboard.supplier.index');
     }
 
     /**
@@ -32,27 +33,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->name = $request->nama_kategori;
-        $category->save();
-
+        $request->validate([
+            'name' => 'required|max:255',
+            'phone' => 'required',
+        ]);
+        Supplier::create($request->all());
         return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $category = Category::find($id);
-
-        return response()->json($category);
+        $supplier = Supplier::find($id);
+        return response()->json($supplier);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Supplier $supplier)
     {
         //
     }
@@ -60,36 +61,34 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        $category->name = $request->nama_kategori;
-        $category->update();
-
+        $supplier = Supplier::find($id);
+        $supplier->update($request->all());
         return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $category = Category::find($id);
-        $category->delete();
+        $supplier = Supplier::find($id);
+        $supplier->delete();
 
         return response(null, 204);
     }
 
     public function data()
     {
-        $category = Category::orderBy('name', 'asc')->get();
-        return Datatables::of($category)
+        $supplier = Supplier::orderBy('name', 'asc')->get();
+        return Datatables::of($supplier)
             ->addIndexColumn()
-            ->addColumn('aksi', function ($category) {
+            ->addColumn('aksi', function ($supplier) {
                 return '
                 <div class="btn-group">
-                    <button onclick="editForm(`'. route('category.update', $category->id) .'`)" class="btn btn-sm btn-info "><i class="far fa-edit"></i> Edit</button>
-                    <button onclick="deleteData(`'. route('category.destroy', $category->id) .'`)" class="btn btn-sm btn-danger "><i class="fa fa-trash" ></i> Delete</button>
+                    <button onclick="editForm(`'. route('supplier.update', $supplier->id) .'`)" class="btn btn-sm btn-info "><i class="far fa-edit"></i> Edit</button>
+                    <button onclick="deleteData(`'. route('supplier.destroy', $supplier->id) .'`)" class="btn btn-sm btn-danger "><i class="fa fa-trash" ></i> Delete</button>
                 </div>
                 ';
             })

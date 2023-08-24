@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use  \App\Models\Product;
+
 class ProductSeeder extends Seeder
 {
     /**
@@ -12,29 +14,26 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\Product::factory()->create([
-        //     'category_id' => 4,
-        //     'code' => 'P0001',
-        //     'name' => 'Buku Tulis 50 Lembar',
-        //     'brand' => 'Kiki',
-        //     'sell_price' => '7000',
-        //     'disc' => '0'
-        // ]);
-        \App\Models\Product::factory()->create([
-            'category_id' => 4,
-            'code' => 'P0002',
+        Product::factory()->create([
+            'category_id' => 1,
+            'name' => 'Buku Tulis 50 Lembar',
+            'brand' => 'Kiki',
+        ]);
+        Product::factory()->create([
+            'category_id' => 1,
             'name' => 'Pulpen Hitam Standard',
             'brand' => 'Standard',
-            'sell_price' => '3000',
-            'disc' => '0'
         ]);
-        \App\Models\Product::factory()->create([
-            'category_id' => 4,
-            'code' => 'P0003',
-            'name' => 'Pulpen Hitam Cair',
-            'brand' => 'Kiki',
-            'sell_price' => '5000',
-            'disc' => '0'
+        Product::factory()->create([
+            'category_id' => 2,
+            'name' => 'Minyak Goreng Filma 1KG',
+            'brand' => 'Filma',
+        ]);
+        Product::factory()->create(
+        [
+            'category_id' => 3,
+            'name' => 'Kerupuk Sambal',
+            'brand' => '',
         ]);
     }
 }

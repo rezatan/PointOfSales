@@ -131,9 +131,36 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <li class="nav-item dropdown user-menu">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+        <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2" alt="User Image">
+        <span class="d-none d-md-inline"> 
+            {{ auth()->user()->name }}
+        </span>  
+        </a>
+      <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <li class="user-header card-header">
+        <img src="{{ asset('adminlte/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="admin">
+          <p class="">
+            {{ auth()->user()->name }}
+            <small>{{ auth()->user()->email }}</small>
+          </p>
+        </li>
+        <li class="user-footer card-footer">
+          <a href="#" class="btn btn-default btn-flat">
+            <i class="fa fa-fw fa-user text-lightblue"></i>
+            Profile
+          </a>
+          <a class="btn btn-default btn-flat float-right " href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          <i class="fa fa-fw fa-power-off text-red"></i>
+          Log Out
+          </a>
+        </li>
+      </ul>
+      </li>
+      <form id="logout-form" action="/logout" method="post" style="display: none;">
+        @csrf
+        <input type="hidden">
+      </form>
     </ul>
-    <form action="/logout" method="post">
-      @csrf
-      <button type="submit" class="btn btn-navbar">Logout <i data-feather="log-out"></i></button>
-    </form>
   </nav>

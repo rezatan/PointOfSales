@@ -10,4 +10,15 @@ class Stock extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    protected $with = ['product', 'supplier'];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
 }

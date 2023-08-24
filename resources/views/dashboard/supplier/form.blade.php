@@ -3,37 +3,30 @@
         <form action="" method="post" class="form-horizontal">
             @csrf
             @method('post')
-
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="name" class="col-lg-2 col-lg-offset-1 control-label">Nama</label>
+                        <label for="name" class="col-lg-2 col-lg-offset-1 control-label">Supplier</label>
                         <div class="col-lg-6">
                             <input type="text" name="name" id="name" class="form-control" required autofocus>
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="category_id" class="col-lg-2 col-lg-offset-1 control-label">Kategori</label>
+                        <label for="address" class="col-lg-2 col-lg-offset-1 control-label">Alamat</label>
                         <div class="col-lg-6">
-                            <select name="category_id" id="category_id" class="form-control" required>
-                                <option value="">Pilih Kategori</option>
-                                @foreach ($category as $key => $item)
-                                <option value="{{ $key }}">{{ $item }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" name="address" id="address" class="form-control" required autofocus>
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="brand" class="col-lg-2 col-lg-offset-1 control-label">Merk</label>
+                        <label for="contact" class="col-lg-2 col-lg-offset-1 control-label">Contact</label>
                         <div class="col-lg-6">
-                            <input type="text" name="brand" id="brand" class="form-control">
+                            <input type="text" name="contact" id="contact" class="form-control" required autofocus>
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>

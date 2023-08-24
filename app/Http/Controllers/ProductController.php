@@ -38,10 +38,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'category_id' => 'required',
-            'sell_price' => 'required',
         ]);
-        $product = Product::latest()->first() ?? new Product();
-        $request['code'] = 'P'. tambah_nol_didepan((int)$product->id +1, 6);
         Product::create($request->all());
         return response()->json('Data berhasil disimpan', 200);
     }
@@ -87,22 +84,16 @@ class ProductController extends Controller
 
     public function data()
     {
-        $product = Product::orderBy('code', 'asc')->get();
+        $product = Product::orderBy('name', 'asc')->get();
         return datatables()
             ->of($product)
             ->addIndexColumn()
             ->addColumn('select_all', function ($product) {
                 return '
-                    <input type="checkbox" name="id_produk[]" value="'. $product->id .'">
+                    <input type="checkbox" name="product_id[]" value="'. $product->id .'">
                 ';
             })
-            ->addColumn('code', function ($product) {
-                return '<span class="label label-success">'. $product->code .'</span>';
-            })
-            ->addColumn('sell_price', function ($product) {
-                return format_uang($product->sell_price);
-            })
-            ->addColumn('aksi', function ($product) {
+            ->addColumn('action', function ($product) {
                 return '
                 <div class="btn-group">
                     <button type="button" onclick="editForm(`'. route('product.update', $product->id) .'`)" class="btn btn-sm btn-info"><i class="far fa-edit"></i>Edit</button>
@@ -110,7 +101,7 @@ class ProductController extends Controller
                 </div>
                 ';
             })
-            ->rawColumns(['aksi', 'code', 'select_all'])
+            ->rawColumns(['action', 'select_all'])
             ->make(true);
     }
 }

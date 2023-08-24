@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\StockController;
+use App\Http\Controllers\SupplierController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function() {
     
     Route::resource('/product/category', CategoryController::class);
     Route::resource('/product', ProductController::class);
-    Route::resource('/product/stock', StockController::class);
+    Route::resource('stock', StockController::class);
+    Route::resource('supplier', SupplierController::class);
 
 });

@@ -1,12 +1,12 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-@lang('sidebar.product.product')
+@lang('app.product.product')
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">@lang('sidebar.product.product')</li>
+    <li class="breadcrumb-item active">@lang('app.product.product')</li>
 @endsection
 
 @section('content')
@@ -23,13 +23,9 @@
                         <th width="5%">
                             <input type="checkbox" name="select_all" id="select_all">
                         </th>
-
-                        <th>Kode</th>
                         <th>Nama</th>
                         <th>Kategori</th>
                         <th>Merk</th>
-                        <th>Harga Jual</th>
-                        <th>Diskon</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
                 </table>
@@ -56,13 +52,10 @@
             },
             columns: [
                 {data: 'select_all', searchable: false, sortable: false},
-                {data: 'code'},
                 {data: 'name'},
                 {data: 'category.name'},
                 {data: 'brand'},
-                {data: 'sell_price'},
-                {data: 'disc'},
-                {data: 'aksi', searchable: false, sortable: false},
+                {data: 'action', searchable: false, sortable: false},
             ]
         });
 
@@ -109,8 +102,6 @@
                 $('#modal-form [name=name]').val(response.name);
                 $('#modal-form [name=category_id]').val(response.category.id);
                 $('#modal-form [name=brand]').val(response.brand);
-                $('#modal-form [name=sell_price]').val(response.sell_price);
-                $('#modal-form [name=disc]').val(response.disc);
             })
             .fail((errors) => {
                 alert('Tidak dapat menampilkan data');

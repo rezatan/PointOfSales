@@ -42,12 +42,12 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">@lang('sidebar.transaction.name')</li>
+          <li class="nav-header">@lang('app.transaction.name')</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                @lang('sidebar.transaction.cashier')
+                @lang('app.transaction.cashier')
               </p>
             </a>
           </li>
@@ -55,7 +55,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                @lang('sidebar.transaction.purchase')
+                @lang('app.transaction.purchase')
               </p>
             </a>
           </li>
@@ -63,7 +63,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
-                @lang('sidebar.transaction.sales')
+                @lang('app.transaction.sales')
               </p>
             </a>
           </li>
@@ -71,16 +71,16 @@
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
-                @lang('sidebar.transaction.expense')
+                @lang('app.transaction.expense')
               </p>
             </a>
           </li>
           <li class="nav-header">DATA MASTER</li>
-          <li class="nav-item {{ Request::is('product/*') ||  Request::is('product') ? 'menu-is-opening menu-open' : '' }}">
+          <li class="nav-item {{ Request::is('product/*') ||  Request::is('product') || Request::is('stock') ? 'menu-is-opening menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
-                @lang('sidebar.product.product')
+                @lang('app.product.product')
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -88,55 +88,55 @@
               <li class="nav-item">
                 <a href="product/category" class="nav-link {{ Request::is('product/category') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>@lang('sidebar.product.category')</p>
+                  <p>@lang('app.product.category')</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/product" class="nav-link {{ Request::is('product') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>@lang('sidebar.product.product')</p>
+                  <p>@lang('app.product.product')</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="product/stock" class="nav-link {{ Request::is('product/stock') ? 'active' : '' }}">
+                <a href="/stock" class="nav-link {{ Request::is('stock') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>@lang('sidebar.product.stock')</p>
+                  <p>@lang('app.product.stock')</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/supplier" class="nav-link {{ Request::is('supplier') ? 'active' : '' }}">
               <i class="nav-icon far fa-envelope"></i>
               <p>
                 Supplier
               </p>
             </a>
           </li>
-          <li class="nav-header">@lang('sidebar.user.name')</li>
+          <li class="nav-header">@lang('app.user.name')</li>
           <li class="nav-item">
             <a href="iframe.html" class="nav-link">
               <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>@lang('sidebar.user.myprofile')</p>
+              <p>@lang('app.user.myprofile')</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="iframe.html" class="nav-link">
               <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>@lang('sidebar.user.userdata')</p>
+              <p>@lang('app.user.userdata')</p>
             </a>
           </li>
-          <li class="nav-header">@lang('sidebar.setting.name')</li>
+          <li class="nav-header">@lang('app.setting.name')</li>
           <li class="nav-item">
             <a href="iframe.html" class="nav-link">
               <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>@lang('sidebar.setting.store')</p>
+              <p>@lang('app.setting.store')</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="iframe.html" class="nav-link">
               <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>@lang('sidebar.setting.display')</p>
+              <p>@lang('app.setting.display')</p>
             </a>
           </li>
 
