@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SupplierController;
@@ -37,10 +38,13 @@ Route::middleware('auth')->group(function() {
         return view('dashboard.index');
     });
     
-    Route::resource('/product/category', CategoryController::class);
+    Route::resource('/category', CategoryController::class);
     Route::resource('/product', ProductController::class);
+
     Route::resource('/stock', StockController::class);
+    
     Route::resource('/supplier', SupplierController::class);
+    Route::resource('/expense', ExpenseController::class);
 
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
