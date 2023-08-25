@@ -12,12 +12,12 @@
 @section('content')
 
 <div class="row">
-    <div class="col-lg-12 mx-auto">
-        <div class="card card-primary card-outline px-1 py-2">
-            <div class="box-header with-border mb-2">
+    <div class="col-lg-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header with-border">
                 <button onclick="addForm('{{ route('product.store') }}')" class="btn btn-success btn-sm "><i class="fa fa-plus-circle"></i> Tambah</button>
             </div>
-            <div class=" table-responsive">
+            <div class="card-body table-responsive">
                 <table id="table" class="table table-stiped table-bordered">
                     <thead>
                         <th width="5%">
@@ -122,39 +122,6 @@
                     alert('Tidak dapat menghapus data');
                     return;
                 });
-        }
-    }
-
-    function deleteSelected(url) {
-        if ($('input:checked').length > 1) {
-            if (confirm('Yakin ingin menghapus data terpilih?')) {
-                $.post(url, $('.form-produk').serialize())
-                    .done((response) => {
-                        table.ajax.reload();
-                    })
-                    .fail((errors) => {
-                        alert('Tidak dapat menghapus data');
-                        return;
-                    });
-            }
-        } else {
-            alert('Pilih data yang akan dihapus');
-            return;
-        }
-    }
-
-    function cetakBarcode(url) {
-        if ($('input:checked').length < 1) {
-            alert('Pilih data yang akan dicetak');
-            return;
-        } else if ($('input:checked').length < 3) {
-            alert('Pilih minimal 3 data untuk dicetak');
-            return;
-        } else {
-            $('.form-produk')
-                .attr('target', '_blank')
-                .attr('action', url)
-                .submit();
         }
     }
 </script>

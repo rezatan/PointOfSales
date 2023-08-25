@@ -46,7 +46,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/expense" class="nav-link">
               <i class="nav-icon fa fa-money-bill-wave"></i>
               <p>
                 @lang('app.transaction.expense')
@@ -54,8 +54,8 @@
             </a>
           </li>
           <li class="nav-header">DATA MASTER</li>
-          <li class="nav-item {{ Request::is('product/*') ||  Request::is('product') || Request::is('stock') ? 'menu-is-opening menu-open' : '' }}">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::is('category') ||  Request::is('product') || Request::is('stock') ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::is('category') ||  Request::is('product') || Request::is('stock') ? 'active' : ''}}">
               <i class="nav-icon fa fa-cube"></i>
               <p>
                 @lang('app.product.product')
@@ -64,7 +64,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="product/category" class="nav-link {{ Request::is('product/category') ? 'active' : '' }}">
+                <a href="/category" class="nav-link {{ Request::is('category') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>@lang('app.product.category')</p>
                 </a>
@@ -91,23 +91,16 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">@lang('app.user.name')</li>
-          <li class="nav-item">
-            <a href="/profile" class="nav-link">
-              <i class="nav-icon fas fa-ellipsis-h"></i>
-              <p>@lang('app.user.myprofile')</p>
-            </a>
-          </li>
           <li class="nav-item">
             <a href="iframe.html" class="nav-link">
-              <i class="nav-icon fas fa-ellipsis-h"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>@lang('app.user.userdata')</p>
             </a>
           </li>
           <li class="nav-header">@lang('app.setting.name')</li>
           <li class="nav-item">
             <a href="iframe.html" class="nav-link">
-              <i class="nav-icon fas fa-ellipsis-h"></i>
+              <i class="nav-icon fas fa-store-alt"></i>
               <p>@lang('app.setting.store')</p>
             </a>
           </li>

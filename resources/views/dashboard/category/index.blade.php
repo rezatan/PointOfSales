@@ -12,12 +12,12 @@
 @section('content')
 
 <div class="row">
-    <div class="col-lg-12 mx-auto">
-        <div class="card card-primary card-outline px-1 py-2">
-            <div class="box-header with-border mb-2">
+    <div class="col-lg-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header with-border">
                 <button onclick="addForm('{{ route('category.store') }}')" class="btn btn-success btn-sm "><i class="fa fa-plus-circle"></i> Tambah</button>
             </div>
-            <div class=" table-responsive">
+            <div class="card-body table-responsive">
                 <table id="table" class="table table-stiped table-bordered">
                     <thead>
                         <th width="5%">No</th>
@@ -44,7 +44,7 @@
         serverSide: true,
         autoWidth: false,
         ajax: {
-            url: '/product/category',
+            url: '/category',
         },
         columns: [
             {data: 'DT_RowIndex', searchable: false, sortable: false},

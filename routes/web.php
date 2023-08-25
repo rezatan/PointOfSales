@@ -42,7 +42,9 @@ Route::middleware('auth')->group(function() {
     Route::resource('/product', ProductController::class);
 
     Route::resource('/stock', StockController::class);
-    
+    Route::post('/stock/delete-selected', [StockController::class, 'deleteSelected'])->name('stock.delete_selected');
+    Route::post('/stock/print-barcode', [StockController::class, 'printBarcode'])->name('stock.print_barcode');
+
     Route::resource('/supplier', SupplierController::class);
     Route::resource('/expense', ExpenseController::class);
 

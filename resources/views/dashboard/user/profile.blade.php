@@ -15,7 +15,7 @@
         <div class="card card-primary card-outline mx-3 px-3 py-2">
             <form action="{{ route('user.update_profile') }}" method="post" class="form-profil" data-toggle="validator" enctype="multipart/form-data">
                 @csrf
-                <div class="box-body">
+                <div class="card-body">
                     <div class="alert alert-info alert-dismissible" style="display: none;">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <i class="icon fa fa-check"></i> Perubahan berhasil disimpan
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-footer text-right">
+                <div class="card-footer text-right">
                     <button class="btn btn-sm btn-flat btn-primary"><i class="fa fa-save"></i> Simpan Perubahan</button>
                 </div>
             </form>

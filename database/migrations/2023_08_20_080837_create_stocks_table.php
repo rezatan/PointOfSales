@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('product_id');
             $table->foreignId('supplier_id');
             $table->string('code');
-            $table->unsignedInteger('qty');
-            $table->integer('buy_price');
-            $table->integer('sell_price');
+            $table->unsignedMediumInteger('qty');
+            $table->unsignedInteger('buy_price');
+            $table->unsignedInteger('sell_price');
             $table->tinyInteger('disc')->default(0);
             $table->timestamps();
         });

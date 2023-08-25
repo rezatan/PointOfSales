@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DataTables;
+use PDF;
 
 use App\Models\Stock;
 use App\Models\Product;
@@ -105,12 +106,34 @@ class StockController extends Controller
             ->addColumn('action', function ($stock) {
                 return '
                 <div class="btn-group">
-                    <button type="button" onclick="editForm(`'. route('stock.update', $stock->id) .'`)" class="btn btn-sm btn-info"><i class="far fa-edit"></i>Edit</button>
-                    <button type="button" onclick="deleteData(`'. route('stock.destroy', $stock->id) .'`)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>Delete</button>
+                    <button type="button" onclick="editForm(`'. route('stock.update', $stock->id) .'`)" class="btn btn-sm btn-info"><i class="far fa-edit"></i></button>
+                    <button type="button" onclick="deleteData(`'. route('stock.destroy', $stock->id) .'`)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
             })
             ->rawColumns(['action', 'code', 'select_all'])
             ->make(true);
+    }
+    public function deleteSelected(Request $request)
+    {
+        foreach ($request->stock_id as $id) {
+            $stock = Stock::find($id);
+            $stock->delete();
+        }
+
+        return response(null, 204);
+    }
+    public function printBarcode(Request $request)
+    {
+        $datastock = array();
+        foreach ($request->stock_id as $id) {
+            $stock = Stock::find($id);
+            $datastock[] = $stock;
+        }
+
+        $no  = 1;
+        $pdf = PDF::loadView('dashboard.stock.barcode', compact('datastock', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('product.pdf');
     }
 }

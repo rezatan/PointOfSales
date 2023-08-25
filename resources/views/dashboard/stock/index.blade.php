@@ -12,27 +12,33 @@
 @section('content')
 
 <div class="row">
-    <div class="col-lg-12 mx-auto">
-        <div class="card card-primary card-outline px-1 py-2">
-            <div class="box-header with-border mb-2">
+    <div class="col-lg-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header with-border">
                 <button onclick="addForm('{{ route('stock.store') }}')" class="btn btn-success btn-sm "><i class="fa fa-plus-circle"></i> Tambah</button>
+                <button onclick="deleteSelected('{{ route('stock.delete_selected') }}')" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Hapus</button>
+                <button onclick="cetakBarcode('{{ route('stock.print_barcode') }}')" class="btn btn-info btn-sm btn-flat"><i class="fa fa-barcode"></i> Cetak Barcode</button>
             </div>
-            <div class=" table-responsive">
+            <div class="card-body table-responsive">
+                <form action="" method="post" class="form-stock">
+                    @csrf
                 <table id="table" class="table table-stiped table-bordered">
                     <thead>
-                        <th width="5%">
+                        <th width="4%">
                             <input type="checkbox" name="select_all" id="select_all">
                         </th>
                         <th>Kode</th>
                         <th>Product</th>
+                        <th>Category</th>
                         <th>Supplier</th>
                         <th>Harga Beli</th>
                         <th>Harga Jual</th>
                         <th>Diskon</th>
                         <th>Stock</th>
-                        <th width="15%"><i class="fa fa-cog"></i></th>
+                        <th><i class="fa fa-cog"></i></th>
                     </thead>
                 </table>
+                </form>
             </div>
         </div>
     </div>
@@ -58,6 +64,7 @@
                 {data: 'select_all', searchable: false, sortable: false},
                 {data: 'code'},
                 {data: 'product.name'},
+                {data: 'product.category.name'},
                 {data: 'supplier.name'},
                 {data: 'buy_price'},
                 {data: 'sell_price'},
@@ -88,7 +95,7 @@
 
     function addForm(url) {
         $('#modal-form').modal('show');
-        $('#modal-form .modal-title').text('Tambah Produk');
+        $('#modal-form .modal-title').text('Tambah Stock');
 
         $('#modal-form form')[0].reset();
         $('#modal-form form').attr('action', url);
@@ -98,7 +105,7 @@
 
     function editForm(url) {
         $('#modal-form').modal('show');
-        $('#modal-form .modal-title').text('Edit Produk');
+        $('#modal-form .modal-title').text('Edit Stock');
 
         $('#modal-form form')[0].reset();
         $('#modal-form form').attr('action', url);
@@ -139,7 +146,7 @@
     function deleteSelected(url) {
         if ($('input:checked').length > 1) {
             if (confirm('Yakin ingin menghapus data terpilih?')) {
-                $.post(url, $('.form-produk').serialize())
+                $.post(url, $('.form-stock').serialize())
                     .done((response) => {
                         table.ajax.reload();
                     })
@@ -162,7 +169,7 @@
             alert('Pilih minimal 3 data untuk dicetak');
             return;
         } else {
-            $('.form-produk')
+            $('.form-stock')
                 .attr('target', '_blank')
                 .attr('action', url)
                 .submit();
