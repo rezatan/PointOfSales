@@ -39,8 +39,6 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        $stock = Stock::latest('code')->first();
-        $request['code'] = 'P'. tambah_nol_didepan((int)$stock->id +1, 6);
         Stock::create($request->all());
         return response()->json('Data berhasil disimpan', 200);
     }
@@ -85,7 +83,7 @@ class StockController extends Controller
     }
     public function data()
     {
-        $stock = Stock::orderBy('code', 'asc')->get();
+        $stock = Stock::orderBy('created_at', 'desc')->get();
         return datatables()
             ->of($stock)
             ->addIndexColumn()
@@ -93,9 +91,6 @@ class StockController extends Controller
                 return '
                     <input type="checkbox" name="stock_id[]" value="'. $stock->id .'">
                 ';
-            })
-            ->addColumn('code', function ($stock) {
-                return '<span class="label label-success">'. $stock->code .'</span>';
             })
             ->addColumn('buy_price', function ($stock) {
                 return format_uang($stock->buy_price);
@@ -111,7 +106,7 @@ class StockController extends Controller
                 </div>
                 ';
             })
-            ->rawColumns(['action', 'code', 'select_all'])
+            ->rawColumns(['action', 'select_all'])
             ->make(true);
     }
     public function deleteSelected(Request $request)

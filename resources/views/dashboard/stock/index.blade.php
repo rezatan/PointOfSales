@@ -24,10 +24,10 @@
                     @csrf
                 <table id="table" class="table table-stiped table-bordered">
                     <thead>
-                        <th width="4%">
+                        <th>No</th>
+                        <th>
                             <input type="checkbox" name="select_all" id="select_all">
                         </th>
-                        <th>Kode</th>
                         <th>Product</th>
                         <th>Category</th>
                         <th>Supplier</th>
@@ -61,8 +61,8 @@
                 url: '/stock',
             },
             columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'select_all', searchable: false, sortable: false},
-                {data: 'code'},
                 {data: 'product.name'},
                 {data: 'product.category.name'},
                 {data: 'supplier.name'},

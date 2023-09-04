@@ -21,4 +21,9 @@ class Stock extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
+
+    public function purchase_details()
+    {
+        return $this->hasMany(PurchaseDetails::class);
+    }
 }

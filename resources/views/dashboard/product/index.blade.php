@@ -16,11 +16,15 @@
         <div class="card card-primary card-outline">
             <div class="card-header with-border">
                 <button onclick="addForm('{{ route('product.store') }}')" class="btn btn-success btn-sm "><i class="fa fa-plus-circle"></i> Tambah</button>
+                <button onclick="deleteSelected('{{ route('product.delete_selected') }}')" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Hapus</button>
             </div>
             <div class="card-body table-responsive">
-                <table id="table" class="table table-stiped table-bordered">
+                <form action="" method="post" class="form-product">
+                    @csrf
+                    <table id="table" class="table table-stiped table-bordered">
                     <thead>
-                        <th width="5%">
+                        <th>Code</th>
+                        <th width="3%">
                             <input type="checkbox" name="select_all" id="select_all">
                         </th>
                         <th>Nama</th>
@@ -29,6 +33,7 @@
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
                 </table>
+            </form>
             </div>
         </div>
     </div>
@@ -51,6 +56,7 @@
                 url: '/product',
             },
             columns: [
+                {data: 'code'},
                 {data: 'select_all', searchable: false, sortable: false},
                 {data: 'name'},
                 {data: 'category.name'},
@@ -124,5 +130,24 @@
                 });
         }
     }
+
+    function deleteSelected(url) {
+        if ($('input:checked').length > 1) {
+            if (confirm('Yakin ingin menghapus data terpilih?')) {
+                $.post(url, $('.form-product').serialize())
+                    .done((response) => {
+                        table.ajax.reload();
+                    })
+                    .fail((errors) => {
+                        alert('Tidak dapat menghapus data');
+                        return;
+                    });
+            }
+        } else {
+            alert('Pilih data yang akan dihapus');
+            return;
+        }
+    }
+
 </script>
 @endpush

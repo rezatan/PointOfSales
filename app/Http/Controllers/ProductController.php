@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use DataTables;
-
+use PDF;
+use App\Models\Stock;
 use App\Models\Product;
 use App\Models\Category;
+
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -84,7 +85,7 @@ class ProductController extends Controller
 
     public function data()
     {
-        $product = Product::orderBy('name', 'asc')->get();
+        $product = Product::orderBy('created_at', 'asc')->get();
         return datatables()
             ->of($product)
             ->addIndexColumn()
@@ -103,5 +104,29 @@ class ProductController extends Controller
             })
             ->rawColumns(['action', 'select_all'])
             ->make(true);
+    }
+
+    public function printBarcode(Request $request)
+    {
+        $dataproduct = array();
+        foreach ($request->product_id as $id) {
+            $product = Product::find($id);
+            $dataproduct[] = $product;
+        }
+
+        $no  = 1;
+        $pdf = PDF::loadView('dashboard.product.barcode', compact('dataproduct', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('product.pdf');
+    }
+
+    public function deleteSelected(Request $request)
+    {
+        foreach ($request->product_id as $id) {
+            $product = Product::find($id);
+            $product->delete();
+        }
+
+        return response(null, 204);
     }
 }
