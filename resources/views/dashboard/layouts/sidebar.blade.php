@@ -30,7 +30,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/purchase" class="nav-link {{ Request::is('purchase') ? 'active' : '' }}">
               <i class="nav-icon fa fa-download"></i>
               <p>
                 @lang('app.transaction.purchase')
@@ -46,7 +46,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/expense" class="nav-link">
+            <a href="/expense" class="nav-link {{ Request::is('expense') ? 'active' : '' }}">
               <i class="nav-icon fa fa-money-bill-wave"></i>
               <p>
                 @lang('app.transaction.expense')

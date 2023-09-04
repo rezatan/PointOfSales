@@ -8,6 +8,10 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PurchaseDetailsController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,14 +43,23 @@ Route::middleware('auth')->group(function() {
     });
     
     Route::resource('/category', CategoryController::class);
-    Route::resource('/product', ProductController::class);
 
+    Route::post('/product/delete-selected', [ProductController::class, 'deleteSelected'])->name('product.delete_selected');
+    Route::resource('/product', ProductController::class);
+    
     Route::resource('/stock', StockController::class);
     Route::post('/stock/delete-selected', [StockController::class, 'deleteSelected'])->name('stock.delete_selected');
     Route::post('/stock/print-barcode', [StockController::class, 'printBarcode'])->name('stock.print_barcode');
 
     Route::resource('/supplier', SupplierController::class);
     Route::resource('/expense', ExpenseController::class);
+
+    Route::get('/purchase/{id}/create', [PurchaseController::class, 'create'])->name('purchase.create');
+    Route::resource('/purchase', PurchaseController::class)->except('create');
+
+    Route::get('/pembelian_detail/{id}/data', [PurchaseDetailsController::class, 'data'])->name('purchase_detail.data');
+    Route::get('/purchase_detail/loadform/{diskon}/{total}', [PurchaseDetailsController::class, 'loadForm'])->name('purchase_detail.load_form');
+    Route::resource('/purchase_detail', PurchaseDetailsController::class)->except('create', 'show', 'edit');
 
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
