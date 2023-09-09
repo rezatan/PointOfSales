@@ -29,6 +29,7 @@
               </p>
             </a>
           </li>
+          @if (auth()->user()->level == 1)
           <li class="nav-item">
             <a href="/purchase" class="nav-link {{ Request::is('purchase') ? 'active' : '' }}">
               <i class="nav-icon fa fa-download"></i>
@@ -92,20 +93,22 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="iframe.html" class="nav-link">
+            <a href="/users" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>@lang('app.user.userdata')</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="iframe.html" class="nav-link">
+            <a href="/shop" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>@lang('app.data.shop')</p>
             </a>
           </li>
+          @endif
+
           <li class="nav-header">@lang('app.setting.name')</li>
           <li class="nav-item">
-            <a href="/shop" class="nav-link">
+            <a href="/" class="nav-link">
               <i class="nav-icon fas fa-store-alt"></i>
               <p>@lang('app.setting.shop')</p>
             </a>

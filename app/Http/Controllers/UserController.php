@@ -11,9 +11,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    { 
+        if ($request->ajax()){
+            return $this->data();
+        }
+        return view ('dashboard.user.index');
     }
 
     /**
@@ -29,21 +32,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->level = 2;
+        $user->save();
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Users $users)
+    public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        return response()->json($user);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Users $users)
+    public function edit($id)
     {
         //
     }
@@ -51,17 +64,44 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Users $users)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->has('password') && $request->password != "") 
+            $user->password = bcrypt($request->password);
+        $user->update();
+
+        return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Users $users)
+    public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return response(null, 204);
+    }
+
+    public function data()
+    {
+        $user = User::isNotAdmin()->orderBy('id', 'desc')->get();
+
+        return datatables()
+            ->of($user)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($user) {
+                return '
+                <div class="btn-group">
+                    <button type="button" onclick="editForm(`'. route('users.update', $user->id) .'`)" class="btn btn-xs btn-info "><i class="far fa-edit"></i> Edit</button>
+                    <button type="button" onclick="deleteData(`'. route('users.destroy', $user->id) .'`)" class="btn btn-xs btn-danger"><i class="fa fa-trash" ></i> Delete</button>
+                </div>
+                ';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
     }
 
     public function profile()

@@ -41,32 +41,33 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::middleware('auth')->group(function() {
     Route::get('/', function () {
         return view('dashboard.index');
+    })->name('dashboard');
+    Route::group(['middleware' => 'level:1'], function () {
+        Route::resource('/category', CategoryController::class);
+
+        Route::post('/product/delete-selected', [ProductController::class, 'deleteSelected'])->name('product.delete_selected');
+        Route::resource('/product', ProductController::class);
+        
+        Route::resource('/stock', StockController::class);
+        Route::post('/stock/delete-selected', [StockController::class, 'deleteSelected'])->name('stock.delete_selected');
+        Route::post('/stock/print-barcode', [StockController::class, 'printBarcode'])->name('stock.print_barcode');
+
+        Route::resource('/supplier', SupplierController::class);
+        Route::resource('/expense', ExpenseController::class);
+
+        Route::get('/purchase/{id}/create', [PurchaseController::class, 'create'])->name('purchase.create');
+        Route::resource('/purchase', PurchaseController::class)->except('create');
+
+        Route::get('/pembelian_detail/{id}/data', [PurchaseDetailsController::class, 'data'])->name('purchase_detail.data');
+        Route::get('/purchase_detail/loadform/{diskon}/{total}', [PurchaseDetailsController::class, 'loadForm'])->name('purchase_detail.load_form');
+        Route::resource('/purchase_detail', PurchaseDetailsController::class)->except('create', 'show', 'edit');
+        
+        Route::resource('/shop', ShopController::class);
+        
+        Route::resource('/users', UserController::class);
     });
-    
-    Route::resource('/category', CategoryController::class);
-
-    Route::post('/product/delete-selected', [ProductController::class, 'deleteSelected'])->name('product.delete_selected');
-    Route::resource('/product', ProductController::class);
-    
-    Route::resource('/stock', StockController::class);
-    Route::post('/stock/delete-selected', [StockController::class, 'deleteSelected'])->name('stock.delete_selected');
-    Route::post('/stock/print-barcode', [StockController::class, 'printBarcode'])->name('stock.print_barcode');
-
-    Route::resource('/supplier', SupplierController::class);
-    Route::resource('/expense', ExpenseController::class);
-
-    Route::get('/purchase/{id}/create', [PurchaseController::class, 'create'])->name('purchase.create');
-    Route::resource('/purchase', PurchaseController::class)->except('create');
-
-    Route::get('/pembelian_detail/{id}/data', [PurchaseDetailsController::class, 'data'])->name('purchase_detail.data');
-    Route::get('/purchase_detail/loadform/{diskon}/{total}', [PurchaseDetailsController::class, 'loadForm'])->name('purchase_detail.load_form');
-    Route::resource('/purchase_detail', PurchaseDetailsController::class)->except('create', 'show', 'edit');
-    
-    Route::resource('/shop', ShopController::class);
-    // Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
-    // Route::get('/shop/first', [ShopController::class, 'show'])->name('shop.show');
-    // Route::post('/shop', [ShopController::class, 'update'])->name('shop.update');
-    
-    Route::get('/profile', [UserController::class, 'profile']);
-    Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
+    Route::group(['middleware' => 'level:1,2'], function () {
+        Route::get('/profile', [UserController::class, 'profile']);
+        Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
+    });
 });

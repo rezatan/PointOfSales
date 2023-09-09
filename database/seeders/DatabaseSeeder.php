@@ -16,9 +16,17 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'Test Admin',
-            'username' => 'test',
-            'email' => 'test@gmail.com',
-            'password' => bcrypt(123456789)
+            'username' => 'testadmin',
+            'email' => 'testadmin@gmail.com',
+            'password' => bcrypt(123456789),
+            'level' => 1
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Test Cashier',
+            'username' => 'testcashier',
+            'email' => 'testcashier@gmail.com',
+            'password' => bcrypt(123456789),
+            'level' => 2
         ]);
         $this->call([
             CategorySeeder::class,
