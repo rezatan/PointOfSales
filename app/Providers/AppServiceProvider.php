@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Shop;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +12,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        view()->composer('*', function ($view) {
+            $shop = Shop::first(); 
+            $view->with('shop', $shop);
+        });
     }
 
     /**

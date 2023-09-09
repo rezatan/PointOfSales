@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PurchaseDetailsController;
 
 
@@ -60,7 +61,12 @@ Route::middleware('auth')->group(function() {
     Route::get('/pembelian_detail/{id}/data', [PurchaseDetailsController::class, 'data'])->name('purchase_detail.data');
     Route::get('/purchase_detail/loadform/{diskon}/{total}', [PurchaseDetailsController::class, 'loadForm'])->name('purchase_detail.load_form');
     Route::resource('/purchase_detail', PurchaseDetailsController::class)->except('create', 'show', 'edit');
-
+    
+    Route::resource('/shop', ShopController::class);
+    // Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+    // Route::get('/shop/first', [ShopController::class, 'show'])->name('shop.show');
+    // Route::post('/shop', [ShopController::class, 'update'])->name('shop.update');
+    
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
 });

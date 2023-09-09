@@ -109,6 +109,7 @@
                     $('[name=name]').val(response.name);
                     $('.tampil-foto').html(`<img src="{{ url('/') }}/${response.photo}" width="200">`);
                     $('.img-profile').attr('src', `{{ url('/') }}/${response.photo}`);
+                    $('#photo').val(''); // Reset input file
                     $('.alert').fadeIn();
                     setTimeout(() => {
                         $('.alert').fadeOut();

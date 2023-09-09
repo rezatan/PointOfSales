@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-      <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <img src="{{ $shop->logo_path }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">{{ $shop->name }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -97,11 +97,17 @@
               <p>@lang('app.user.userdata')</p>
             </a>
           </li>
-          <li class="nav-header">@lang('app.setting.name')</li>
           <li class="nav-item">
             <a href="iframe.html" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>@lang('app.data.shop')</p>
+            </a>
+          </li>
+          <li class="nav-header">@lang('app.setting.name')</li>
+          <li class="nav-item">
+            <a href="/shop" class="nav-link">
               <i class="nav-icon fas fa-store-alt"></i>
-              <p>@lang('app.setting.store')</p>
+              <p>@lang('app.setting.shop')</p>
             </a>
           </li>
           <li class="nav-item">

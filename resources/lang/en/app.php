@@ -19,8 +19,10 @@ return [
 	],
 	"setting" => [
 		"name" => "SETTING",
-		"store" => "Store",
+		"shop" => "My Shop",
 		"display" => "Display",
 	],
-
+	"data" => [
+		"shop" => "Data Shop",
+	],
 ];

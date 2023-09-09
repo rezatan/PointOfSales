@@ -19,7 +19,10 @@ return [
 	],
 	"setting" => [
 		"name" => "PENGATURAN",
-		"store" => "Toko",
+		"shop" => "Toko Saya",
 		"display" => "Tampilan",
+	],
+	"data" => [
+		"shop" => "Data Toko",
 	],
 ];
