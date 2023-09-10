@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CashierController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -69,8 +71,24 @@ Route::middleware('auth')->group(function() {
 
         Route::post('/member/cetak-member', [MemberController::class, 'cetakMember'])->name('member.cetak_member');
         Route::resource('/member', MemberController::class);
+
+        Route::get('/sale/data', [SaleController::class, 'data'])->name('penjualan.data');
+        Route::get('/sale', [SaleController::class, 'index'])->name('penjualan.index');
+        Route::get('/sale/{id}', [SaleController::class, 'show'])->name('penjualan.show');
+        Route::delete('/sale/{id}', [SaleController::class, 'destroy'])->name('penjualan.destroy');
     });
     Route::group(['middleware' => 'level:1,2'], function () {
+        Route::get('/cashier/new', [SaleController::class, 'create'])->name('transaksi.baru');
+        Route::post('/cashier/save', [SaleController::class, 'store'])->name('transaksi.simpan');
+        Route::get('/cashier/done', [SaleController::class, 'selesai'])->name('transaksi.selesai');
+        Route::get('/cashier/nota-small', [SaleController::class, 'notaKecil'])->name('transaksi.nota_kecil');
+        Route::get('/cashier/nota-big', [SaleController::class, 'notaBesar'])->name('transaksi.nota_besar');
+
+        Route::get('/cashier/{id}/data', [CashierController::class, 'data'])->name('transaksi.data');
+        Route::get('/cashier/loadform/{diskon}/{total}/{diterima}', [CashierController::class, 'loadForm'])->name('transaksi.load_form');
+        Route::resource('/cashier', CashierController::class)
+            ->except('create', 'show', 'edit');
+
         Route::get('/profile', [UserController::class, 'profile']);
         Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
     });

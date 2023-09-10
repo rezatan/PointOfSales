@@ -22,10 +22,18 @@
           </li>
           <li class="nav-header">@lang('app.transaction.name')</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/cashier/new" class="nav-link {{ Request::is('cashier') ? 'active' : '' }}">
               <i class="nav-icon fa fa-calculator"></i>
               <p>
                 @lang('app.transaction.cashier')
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/cashier" class="nav-link">
+              <i class="nav-icon fa fa-calculator"></i>
+              <p>
+                @lang('app.transaction.cashier') Aktif
               </p>
             </a>
           </li>
@@ -39,7 +47,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/sale" class="nav-link">
               <i class="nav-icon fa fa-upload"></i>
               <p>
                 @lang('app.transaction.sales')
