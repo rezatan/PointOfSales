@@ -93,13 +93,19 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/users" class="nav-link">
+            <a href="/users" class="nav-link {{ Request::is('users') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>@lang('app.user.userdata')</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/shop" class="nav-link">
+            <a href="/member" class="nav-link {{ Request::is('member') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>Data Member</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/shop" class="nav-link {{ Request::is('shop') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>@lang('app.data.shop')</p>
             </a>

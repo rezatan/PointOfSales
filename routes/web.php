@@ -5,6 +5,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -65,6 +66,9 @@ Route::middleware('auth')->group(function() {
         Route::resource('/shop', ShopController::class);
         
         Route::resource('/users', UserController::class);
+
+        Route::post('/member/cetak-member', [MemberController::class, 'cetakMember'])->name('member.cetak_member');
+        Route::resource('/member', MemberController::class);
     });
     Route::group(['middleware' => 'level:1,2'], function () {
         Route::get('/profile', [UserController::class, 'profile']);
