@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="active">Transaksi Penjualan</li>
+    <li class="breadcrumb-item active">@lang('app.transaction.sales') / Done</li>
 @endsection
 
 @section('content')

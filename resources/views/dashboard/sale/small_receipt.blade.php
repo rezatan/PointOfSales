@@ -76,9 +76,9 @@
                 <td colspan="3">{{ $item->stock->product->name }}</td>
             </tr>
             <tr>
-                <td>{{ $item->qty }} x {{ format_uang($item->sell_price) }}</td>
+                <td>{{ $item->qty }} x {{ format_uang($item->sell_price) }} {{ $item->disc > 0 ? ' - ' . $item->disc . '%': '' }}</td>
                 <td></td>
-                <td class="text-right">{{ format_uang($item->qty * $item->sell_price) }}</td>
+                <td class="text-right">{{ format_uang($item->subtotal) }}</td>
             </tr>
         @endforeach
     </table>
@@ -93,10 +93,12 @@
             <td>Total Item:</td>
             <td class="text-right">{{ format_uang($penjualan->total_qty) }}</td>
         </tr>
+        @if ($penjualan->disc > 0)
         <tr>
-            <td>Diskon:</td>
-            <td class="text-right">{{ format_uang($penjualan->disc) }}</td>
-        </tr>
+            <td>Diskon Member:</td>
+            <td class="text-right">{{ format_uang($penjualan->disc) }}%</td>
+        </tr>     
+        @endif
         <tr>
             <td>Total Bayar:</td>
             <td class="text-right">{{ format_uang($penjualan->bill) }}</td>

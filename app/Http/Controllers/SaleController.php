@@ -44,7 +44,9 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $penjualan = Sale::findOrFail($request->id_penjualan);
-        $penjualan->member_id = $request->id_member;
+        if ($request->id_member){
+            $penjualan->member_id = $request->id_member;
+        }
         $penjualan->total_qty = $request->total_item;
         $penjualan->total_price = $request->total;
         $penjualan->disc = $request->diskon;
@@ -54,12 +56,12 @@ class SaleController extends Controller
 
         $detail = Cashier::where('sale_id', $penjualan->id)->get();
         foreach ($detail as $item) {
-            $item->disc = $request->diskon;
+            $stok = Stock::find($item->stock_id);
+            $item->disc = $stok->disc;
             $item->update();
 
-            $produk = Stock::find($item->stock_id);
-            $produk->qty -= $item->qty;
-            $produk->update();
+            $stok->qty -= $item->qty;
+            $stok->update();
         }
 
         return redirect()->route('transaksi.selesai');
@@ -70,7 +72,7 @@ class SaleController extends Controller
      */
     public function show($id)
     {
-        $detail = Cashier::with('stock')->where('sale_id', $id)->get();
+        $detail = Cashier::where('sale_id', $id)->get();
 
         return datatables()
             ->of($detail)
@@ -79,7 +81,7 @@ class SaleController extends Controller
                 return '<span class="label label-success">'. $detail->stock->product->code .'</span>';
             })
             ->addColumn('nama_produk', function ($detail) {
-                return $detail->stock->produk->name;
+                return $detail->stock->product->name;
             })
             ->addColumn('harga_jual', function ($detail) {
                 return 'Rp. '. format_uang($detail->sell_price);
@@ -134,20 +136,18 @@ class SaleController extends Controller
     public function selesai()
     {
         $setting = Shop::first();
-
+        session()->forget('id_penjualan');
         return view('dashboard.sale.done', compact('setting'));
     }
 
     public function notaKecil()
     {
         $setting = Shop::first();
-        $penjualan = Sale::find(session('id_penjualan'));
+        $penjualan = Sale::where('bill', '>', 0)->orderBy('created_at', 'desc')->first();
         if (! $penjualan) {
             abort(404);
         }
-        $detail = Cashier::with('stock')
-            ->where('sale_id', session('id_penjualan'))
-            ->get();
+        $detail = Cashier::where('sale_id', $penjualan->id)->get();
         
         return view('dashboard.sale.small_receipt', compact('setting', 'penjualan', 'detail'));
     }
@@ -155,13 +155,11 @@ class SaleController extends Controller
     public function notaBesar()
     {
         $setting = Shop::first();
-        $penjualan = Sale::find(session('id_penjualan'));
+        $penjualan = Sale::where('bill', '>', 0)->orderBy('created_at')->first();
         if (! $penjualan) {
             abort(404);
         }
-        $detail = Cashier::with('stock')
-            ->where('sale_id', session('id_penjualan'))
-            ->get();
+        $detail = Cashier::where('sale_id', $penjualan->id)->get();
 
         $pdf = PDF::loadView('dashboard.sale.big_receipt', compact('setting', 'penjualan', 'detail'));
         $pdf->setPaper(0,0,609,440, 'potrait');
@@ -170,7 +168,7 @@ class SaleController extends Controller
 
     public function data()
     {
-        $penjualan = Sale::with('member')->orderBy('id', 'desc')->get();
+        $penjualan = Sale::where('bill', '>', 0)->orderBy('id', 'desc')->get();
 
         return datatables()
             ->of($penjualan)
@@ -200,8 +198,8 @@ class SaleController extends Controller
             ->addColumn('aksi', function ($penjualan) {
                 return '
                 <div class="btn-group">
-                    <button onclick="showDetail(`'. route('sale.show', $penjualan->id) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
-                    <button onclick="deleteData(`'. route('sale.destroy', $penjualan->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                    <button onclick="showDetail(`'. route('penjualan.show', $penjualan->id) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
+                    <button onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
             })

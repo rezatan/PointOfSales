@@ -230,7 +230,16 @@
         });
 
         $('.btn-simpan').on('click', function () {
-            $('.form-penjualan').submit();
+            var diterima = parseFloat($('#diterima').val());
+            var bayar = parseFloat($('#bayar').val());
+
+            if (diterima < bayar) {
+                alert('Nilai yang diterima harus lebih besar atau sama dengan nilai bayar.');
+                $('#diterima').focus();
+                return;
+            } else {
+                $('.form-penjualan').submit();
+            }
         });
     });
 
