@@ -29,11 +29,7 @@ class CashierController extends Controller
 
             return view('dashboard.cashier.index', compact('produk', 'member', 'diskon', 'id_penjualan', 'penjualan', 'memberSelected'));
         } else {
-            if (auth()->user()->level == 1) {
                 return redirect()->route('transaksi.baru');
-            } else {
-                return redirect()->route('home');
-            }
         }
     }
 

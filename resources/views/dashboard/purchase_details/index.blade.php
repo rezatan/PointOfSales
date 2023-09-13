@@ -114,7 +114,7 @@
                             <div class="form-group row">
                                 <label for="bayar" class="col-lg-2 control-label">Bayar</label>
                                 <div class="col-lg-8">
-                                    <input type="text" id="bayarrp" class="form-control">
+                                    <input type="text" id="bayarrp" class="form-control" readonly>
                                 </div>
                             </div>
                         </form>

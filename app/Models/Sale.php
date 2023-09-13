@@ -14,4 +14,14 @@ class Sale extends Model
     {
         return $this->hasMany(Cashier::class);
     }
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

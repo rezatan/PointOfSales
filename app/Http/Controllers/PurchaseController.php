@@ -64,6 +64,7 @@ class PurchaseController extends Controller
             $stock->buy_price = $item->buy_price;
             $stock->update();
         }
+        session()->forget('purchase_id');
         return redirect()->route('purchase.index');
     }
 
@@ -117,7 +118,7 @@ class PurchaseController extends Controller
 
     public function data()
     {
-        $purchase = Purchase::orderBy('id', 'desc')->get();
+        $purchase = Purchase::where('total_price', '>', 0)->orderBy('id', 'desc')->get();
 
         return datatables()
             ->of($purchase)
