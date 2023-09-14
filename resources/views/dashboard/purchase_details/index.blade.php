@@ -244,6 +244,14 @@
             loadForm($(this).val());
         });
 
+        $('#kode_produk').keypress(function(e) {
+            if (e.which == 13) { // 13 adalah kode tombol "Enter"
+                e.preventDefault(); // Menghentikan perilaku default tombol "Enter" (mengirimkan formulir)
+                $('#id_produk').val('');
+                tambahProduk();
+                $('#kode_produk').val('');
+            }
+        });
         $('.btn-simpan').on('click', function () {
             $('.form-pembelian').submit();
         });
@@ -262,6 +270,7 @@
         $('#kode_produk').val(code);
         hideProduk();
         tambahProduk();
+        $('#kode_produk').val('');
     }
 
     function tambahProduk() {

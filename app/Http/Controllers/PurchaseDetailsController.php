@@ -35,7 +35,7 @@ class PurchaseDetailsController extends Controller
     public function store(Request $request)
     {
         if ($request->ajax()){
-            $produk = Product::where('id', $request->id_produk)->first();
+            $produk = Product::where('code', $request->kode_produk)->first();
             if (! $produk) {
                 return response()->json('Data gagal disimpan', 400);
             }
