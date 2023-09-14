@@ -18,7 +18,7 @@ class CashierController extends Controller
      */
     public function index()
     {
-        $produk = Stock::orderBy('created_at')->get();
+        $stock = Stock::orderBy('created_at', 'desc')->get();
         $member = Member::orderBy('name')->get();
         $diskon = Shop::first()->disc ?? 0;
 
@@ -27,7 +27,7 @@ class CashierController extends Controller
             $penjualan = Sale::find($id_penjualan);
             $memberSelected = $penjualan->member ?? new Member();
 
-            return view('dashboard.cashier.index', compact('produk', 'member', 'diskon', 'id_penjualan', 'penjualan', 'memberSelected'));
+            return view('dashboard.cashier.index', compact('stock', 'member', 'diskon', 'id_penjualan', 'penjualan', 'memberSelected'));
         } else {
                 return redirect()->route('transaksi.baru');
         }
@@ -46,18 +46,26 @@ class CashierController extends Controller
      */
     public function store(Request $request)
     {
-        $produk = Stock::where('id', $request->id_produk)->first();
-        if (! $produk) {
+        if($request->id_produk != '' ) {
+            $stock = Stock::where('id', $request->id_produk)->first();
+        }
+        else{
+            $product = Product::where('code', $request->kode_produk)->first();
+            if ($product) {
+                $stock = $product->stocks()->where('qty', '>', 0)->orderBy('created_at', 'desc')->first();
+            }
+        }
+        if (! $stock) {
             return response()->json('Data gagal disimpan', 400);
         }
 
         $detail = new Cashier();
         $detail->sale_id = $request->id_penjualan;
-        $detail->stock_id = $produk->id;
-        $detail->sell_price = $produk->sell_price;
+        $detail->stock_id = $stock->id;
+        $detail->sell_price = $stock->sell_price;
         $detail->qty = 1;
-        $detail->disc = $produk->disc;
-        $detail->subtotal = $produk->sell_price - ($produk->disc / 100 * $produk->sell_price);;
+        $detail->disc = $stock->disc;
+        $detail->subtotal = $stock->sell_price - ($stock->disc / 100 * $stock->sell_price);;
         $detail->save();
 
         return response()->json('Data berhasil disimpan', 200);

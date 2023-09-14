@@ -63,10 +63,10 @@
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Harga</th>
-                        <th width="15%">Jumlah</th>
+                        <th width="10%">Jumlah</th>
                         <th>Diskon</th>
                         <th>Subtotal</th>
-                        <th width="15%"><i class="fa fa-cog"></i></th>
+                        <th width="10%"><i class="fa fa-cog"></i></th>
                     </thead>
                 </table>
 
@@ -85,14 +85,14 @@
                             <input type="hidden" name="id_member" id="id_member" value="{{ $memberSelected->id_member }}">
 
                             <div class="form-group row">
-                                <label for="totalrp" class="col-lg-2 control-label">Total</label>
-                                <div class="col-lg-8">
+                                <label for="totalrp" class="col-lg-3 control-label">Total</label>
+                                <div class="col-lg-7">
                                     <input type="text" id="totalrp" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="kode_member" class="col-lg-2 control-label">Member</label>
-                                <div class="col-lg-8">
+                                <label for="kode_member" class="col-lg-3 control-label">Member</label>
+                                <div class="col-lg-7">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="kode_member" value="{{ $memberSelected->kode_member }}">
                                         <span class="input-group-btn">
@@ -102,28 +102,28 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="diskon" class="col-lg-2 control-label">Diskon</label>
-                                <div class="col-lg-8">
+                                <label for="diskon" class="col-lg-3 control-label">Diskon</label>
+                                <div class="col-lg-7">
                                     <input type="number" name="diskon" id="diskon" class="form-control" 
                                         value="{{ ! empty($memberSelected->id_member) ? $diskon : 0 }}" 
                                         readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="bayar" class="col-lg-2 control-label">Bayar</label>
-                                <div class="col-lg-8">
+                                <label for="bayar" class="col-lg-3 control-label">Bayar</label>
+                                <div class="col-lg-7">
                                     <input type="text" id="bayarrp" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="diterima" class="col-lg-2 control-label">Diterima</label>
-                                <div class="col-lg-8">
+                                <label for="diterima" class="col-lg-3 control-label">Diterima</label>
+                                <div class="col-lg-7">
                                     <input type="number" id="diterima" class="form-control" name="diterima" value="{{ $penjualan->diterima ?? 0 }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="kembali" class="col-lg-2 control-label">Kembali</label>
-                                <div class="col-lg-8">
+                                <label for="kembali" class="col-lg-3 control-label">Kembali</label>
+                                <div class="col-lg-7">
                                     <input type="text" id="kembali" name="kembali" class="form-control" value="0" readonly>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
             </div>
 
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary btn-sm btn-flat pull-right btn-simpan"><i class="fa fa-floppy-o"></i> Simpan Transaksi</button>
+                <button type="submit" class="btn btn-primary btn-sm btn-flat float-right btn-simpan"><i class="fa fa-floppy-o"></i> Simpan Transaksi</button>
             </div>
         </div>
     </div>
@@ -178,7 +178,15 @@
                 $('#diterima').trigger('input');
             }, 300);
         });
-        table2 = $('.table-produk').DataTable();
+        $('#kode_produk').keypress(function(e) {
+        if (e.which == 13) { // 13 adalah kode tombol "Enter"
+            e.preventDefault(); // Menghentikan perilaku default tombol "Enter" (mengirimkan formulir)
+            $('#id_produk').val('');
+            tambahProduk();
+            $('#kode_produk').val('');
+        }
+    });
+        table2 = $('.table-produk').DataTable({order: [3, 'desc']});
 
         $(document).on('input', '.quantity', function () {
             let id = $(this).data('id');
@@ -256,6 +264,7 @@
         $('#kode_produk').val(kode);
         hideProduk();
         tambahProduk();
+        $('#kode_produk').val('');
     }
 
     function tambahProduk() {

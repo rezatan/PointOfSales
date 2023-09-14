@@ -45,5 +45,11 @@ class ProductSeeder extends Seeder
             'name' => 'Pulpen Hitam Kiky',
             'brand' => 'Kiky',
         ]);
+        Product::factory()->create([
+            'category_id' => 1,
+            'code' => '8997010510037',
+            'name' => 'Buku Tulis 30 Lembar',
+            'brand' => 'Enteng Deluxe',
+        ]);
     }
 }

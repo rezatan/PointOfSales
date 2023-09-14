@@ -9,18 +9,20 @@
             <div class="modal-body">
                 <table class="table table-striped table-bordered table-produk">
                     <thead>
-                        <th width="5%">No</th>
                         <th>Kode</th>
                         <th>Nama</th>
-                        <th>Harga Beli</th>
+                        <th>Supplier</th>
+                        <th>T Masuk</th>
+                        <th>Harga Jual</th>
                         <th><i class="fa fa-cog"></i></th>
                     </thead>
                     <tbody>
-                        @foreach ($produk as $key => $item)
+                        @foreach ($stock as $key => $item)
                             <tr>
-                                <td width="5%">{{ $key+1 }}</td>
                                 <td><span class="label label-success">{{ $item->product->code }}</span></td>
                                 <td>{{ $item->product->name }}</td>
+                                <td>{{ $item->supplier->name }}</td>
+                                <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $item->sell_price }}</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-xs btn-flat"

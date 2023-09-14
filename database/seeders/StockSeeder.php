@@ -54,5 +54,13 @@ class StockSeeder extends Seeder
             'sell_price' => 5000,
             'disc' => '0',
         ]);
+        Stock::factory()->create([
+            'product_id' => 6,
+            'supplier_id' => 1,
+            'qty' => 200,
+            'buy_price' => 2500,
+            'sell_price' => 3000,
+            'disc' => '0',
+        ]);
     }
 }

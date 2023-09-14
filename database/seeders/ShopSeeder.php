@@ -20,6 +20,7 @@ class ShopSeeder extends Seeder
             'bill_type' => 1, //small
             'logo_path' => '/img/logo.png',
             'member_card_path' => '/img/member.png',
+            'disc' => '5',
         ]);
     }
 }
