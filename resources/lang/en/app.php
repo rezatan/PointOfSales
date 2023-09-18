@@ -25,4 +25,6 @@ return [
 	"data" => [
 		"shop" => "Data Shop",
 	],
+	"report" => "Report",
+	"income" => "Income",
 ];

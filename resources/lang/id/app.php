@@ -25,4 +25,6 @@ return [
 	"data" => [
 		"shop" => "Data Toko",
 	],
+	"report" => "Laporan",
+	"income" => "Pendapatan",
 ];

@@ -1,0 +1,43 @@
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form">
+    <div class="modal-dialog modal-lg" role="document">
+        <form action="{{ route('laporan.index') }}" method="get" data-toggle="validator" class="form-horizontal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Periode Laporan</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="tanggal_awal" class="col-lg-2 col-lg-offset-1 control-label">Tanggal Awal</label>
+                        <div class="input-group date col-lg-6" id="tanggal_awal" data-target-input="nearest">
+                            <input type="text" name="tanggal_awal" id="tanggal_awal" class="form-control datetimepicker-input" data-target="#tanggal_awal" required
+                                value="{{ request('tanggal_awal') ?? date('Y-m-01')}}"
+                                style="border-radius: 0 !important;">
+                            <div class="input-group-append" data-target="#tanggal_awal" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                    <div class="form-group row">
+                        <label for="tanggal_akhir" class="col-lg-2 col-lg-offset-1 control-label">Tanggal Akhir</label>
+                        <div class="col-lg-6 input-group date col-lg-6" id="tanggal_akhir" data-target-input="nearest">
+                            <input type="text" name="tanggal_akhir" id="tanggal_akhir" class="form-control datetimepicker-input" data-target="#tanggal_akhir" required
+                                value="{{ request('tanggal_akhir') ?? date('Y-m-d') }}"
+                                style="border-radius: 0 !important;">
+                            <div class="input-group-append" data-target="#tanggal_akhir" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-flat btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                    <button type="button" class="btn btn-sm btn-flat btn-warning" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Batal</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

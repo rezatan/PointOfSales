@@ -14,7 +14,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PurchaseDetailsController;
-
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +76,10 @@ Route::middleware('auth')->group(function() {
         Route::get('/sale', [SaleController::class, 'index'])->name('penjualan.index');
         Route::get('/sale/{id}', [SaleController::class, 'show'])->name('penjualan.show');
         Route::delete('/sale/{id}', [SaleController::class, 'destroy'])->name('penjualan.destroy');
+
+        Route::get('/report', [ReportController::class, 'index'])->name('laporan.index');
+        Route::get('/report/data/{awal}/{akhir}', [ReportController::class, 'data'])->name('laporan.data');
+        Route::get('/report/pdf/{awal}/{akhir}', [ReportController::class, 'exportPDF'])->name('laporan.export_pdf');
     });
     Route::group(['middleware' => 'level:1,2'], function () {
         Route::get('/cashier/new', [SaleController::class, 'create'])->name('transaksi.baru');
@@ -87,8 +91,8 @@ Route::middleware('auth')->group(function() {
         Route::get('/cashier/{id}/data', [CashierController::class, 'data'])->name('transaksi.data');
         Route::get('/cashier/loadform/{diskon}/{total}/{diterima}', [CashierController::class, 'loadForm'])->name('transaksi.load_form');
         Route::resource('/cashier', CashierController::class)
-            ->except('create', 'show', 'edit');
-
+            ->except('create', 'show', 'edit');   
+        
         Route::get('/profile', [UserController::class, 'profile']);
         Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
     });

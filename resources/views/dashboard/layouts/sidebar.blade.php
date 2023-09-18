@@ -112,6 +112,13 @@
           </li>
           @endif
 
+          <li class="nav-header">@lang('app.report')</li>
+          <li class="nav-item">
+            <a href="/report" class="nav-link {{ Request::is('report') ? 'active' : '' }}">
+              <i class="nav-icon far fa-file-pdf"></i>
+              <p>@lang('app.income')</p>
+            </a>
+          </li>
           <li class="nav-header">@lang('app.setting.name')</li>
           <li class="nav-item">
             <a href="/" class="nav-link">
