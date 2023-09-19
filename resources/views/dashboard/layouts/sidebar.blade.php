@@ -59,7 +59,7 @@
             <a href="#" class="nav-link {{ Request::is('category') ||  Request::is('product') || Request::is('stock') ? 'active' : ''}}">
               <i class="nav-icon fa fa-cube"></i>
               <p>
-                @lang('app.product.product')
+                @lang('app.product')
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -67,19 +67,19 @@
               <li class="nav-item">
                 <a href="/category" class="nav-link {{ Request::is('category') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>@lang('app.product.category')</p>
+                  <p>@lang('app.category')</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/product" class="nav-link {{ Request::is('product') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>@lang('app.product.product')</p>
+                  <p>@lang('app.product')</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/stock" class="nav-link {{ Request::is('stock') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>@lang('app.product.stock')</p>
+                  <p>@lang('app.stock')</p>
                 </a>
               </li>
             </ul>
@@ -110,8 +110,6 @@
               <p>@lang('app.data.shop')</p>
             </a>
           </li>
-          @endif
-
           <li class="nav-header">@lang('app.report')</li>
           <li class="nav-item">
             <a href="/report" class="nav-link {{ Request::is('report') ? 'active' : '' }}">
@@ -119,6 +117,8 @@
               <p>@lang('app.income')</p>
             </a>
           </li>
+          @endif
+
           <li class="nav-header">@lang('app.setting.name')</li>
           <li class="nav-item">
             <a href="/" class="nav-link">

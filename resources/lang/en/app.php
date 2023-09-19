@@ -27,4 +27,7 @@ return [
 	],
 	"report" => "Report",
 	"income" => "Income",
+	'category' => "Categories",
+	"product" => "Product",
+	"stock" => "Stock",
 ];

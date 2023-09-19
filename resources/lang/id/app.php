@@ -27,4 +27,7 @@ return [
 	],
 	"report" => "Laporan",
 	"income" => "Pendapatan",
+	'category' => "Kategori",
+	"product" => "Produk",
+	"stock" => "Stok",
 ];
