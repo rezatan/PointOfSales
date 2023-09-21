@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Member;
+use App\Models\Cashier;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -40,6 +40,12 @@ class DatabaseSeeder extends Seeder
             PurchaseDetailsSeeder::class,
             ShopSeeder::class,
             MemberSeeder::class,
+        ]);
+        $this->call([
+            Cashier::factory(250)->create(),
+        ]);
+        $this->call([
+            SaleSeeder::class,
         ]);
     }
 }

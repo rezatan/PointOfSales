@@ -33,7 +33,7 @@ class StockSeeder extends Seeder
         Stock::factory()->create([
             'product_id' => 3,
             'supplier_id' => 2,
-            'qty' => 50,
+            'qty' => 150,
             'buy_price' => 15000,
             'sell_price' => 20000,
             'disc' => '10',

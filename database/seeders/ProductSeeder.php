@@ -16,13 +16,13 @@ class ProductSeeder extends Seeder
     {
         Product::factory()->create([
             'category_id' => 1,
-            'code' => 'P00001',
+            'code' => '',
             'name' => 'Buku Tulis 50 Lembar',
             'brand' => 'Kiky',
         ]);
         Product::factory()->create([
             'category_id' => 1,
-            'code' => 'P00002',
+            'code' => '',
             'name' => 'Pulpen Hitam Standard',
             'brand' => 'Standard',
         ]);

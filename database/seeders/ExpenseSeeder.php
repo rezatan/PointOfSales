@@ -17,13 +17,17 @@ class ExpenseSeeder extends Seeder
         Expense::factory()->create([
             'desc' => 'Pembayaran Listrik Toko',
             'nominal' => 500000,
+            'created_at' => date('Y-m-01'),
+            'updated_at' => date('Y-m-01'),
         ]);
         Expense::factory()->create([
             'desc' => 'Pembayaran Air Toko',
             'nominal' => 300000,
+            'created_at' => date('Y-m-01'),
+            'updated_at' => date('Y-m-01'),
         ]);
         Expense::factory()->create([
-            'desc' => 'Jajan Bersama',
+            'desc' => 'Panas Gaes Hauzzs',
             'nominal' => 200000,
         ]);
     }

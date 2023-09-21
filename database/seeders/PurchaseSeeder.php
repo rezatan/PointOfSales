@@ -19,6 +19,8 @@ class PurchaseSeeder extends Seeder
             'total_price' => 1100000,
             'disc' => '0',
             'payment' => 1100000,
+            'created_at' => date('Y-m-05'),
+            'updated_at' => date('Y-m-05'),
         ]);
     }
 }
