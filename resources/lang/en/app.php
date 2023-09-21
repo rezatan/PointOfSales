@@ -1,10 +1,5 @@
 <?php
 return [
-	"product" => [
-		"category" => "Category",
-		"product" => "Product",
-		"stock" => "Stock",
-	],
 	"transaction" => [
 		"name" => "TRANSACTION",
 		'cashier' => "Cashier",
@@ -30,4 +25,5 @@ return [
 	'category' => "Categories",
 	"product" => "Product",
 	"stock" => "Stock",
+	'userlist' => 'User List',
 ];

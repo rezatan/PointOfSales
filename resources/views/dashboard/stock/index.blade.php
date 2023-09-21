@@ -1,12 +1,12 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-@lang('app.product.stock')
+@lang('app.stock')
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">@lang('app.product.stock')</li>
+    <li class="breadcrumb-item active">@lang('app.stock')</li>
 @endsection
 
 @section('content')
@@ -17,7 +17,6 @@
             <div class="card-header with-border">
                 <button onclick="addForm('{{ route('stock.store') }}')" class="btn btn-success btn-sm "><i class="fa fa-plus-circle"></i> Tambah</button>
                 <button onclick="deleteSelected('{{ route('stock.delete_selected') }}')" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Hapus</button>
-                <button onclick="cetakBarcode('{{ route('stock.print_barcode') }}')" class="btn btn-info btn-sm btn-flat"><i class="fa fa-barcode"></i> Cetak Barcode</button>
             </div>
             <div class="card-body table-responsive">
                 <form action="" method="post" class="form-stock">
@@ -161,19 +160,5 @@
         }
     }
 
-    function cetakBarcode(url) {
-        if ($('input:checked').length < 1) {
-            alert('Pilih data yang akan dicetak');
-            return;
-        } else if ($('input:checked').length < 3) {
-            alert('Pilih minimal 3 data untuk dicetak');
-            return;
-        } else {
-            $('.form-stock')
-                .attr('target', '_blank')
-                .attr('action', url)
-                .submit();
-        }
-    }
 </script>
 @endpush

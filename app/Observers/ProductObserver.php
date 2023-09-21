@@ -9,20 +9,22 @@ class ProductObserver
     /**
      * Handle the Product "created" event.
      */
-    public function creating(Product $product): void
+    public function created(Product $product): void
     {
         if (! $product->code) {
-            $lastId = Product::max('id');
-            $product->code = 'P' . str_pad($lastId + 1, 5, '0', STR_PAD_LEFT);
+            $product->code = 'P' . str_pad($product->id, 5, '0', STR_PAD_LEFT);
         }
+        $product->save();
     }
 
     /**
      * Handle the Product "updated" event.
      */
-    public function updated(Product $product): void
+    public function updating(Product $product): void
     {
-        //
+        if (! $product->code) {
+            $product->code = 'P' . str_pad($product->id, 5, '0', STR_PAD_LEFT);
+        }
     }
 
     /**

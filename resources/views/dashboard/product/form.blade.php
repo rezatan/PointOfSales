@@ -31,6 +31,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="code" class="col-lg-2 col-lg-offset-1 control-label">Code</label>
+                        <div class="col-lg-6">
+                            <input type="text" name="code" id="code" class="form-control">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="brand" class="col-lg-2 col-lg-offset-1 control-label">Merk</label>
                         <div class="col-lg-6">
                             <input type="text" name="brand" id="brand" class="form-control">

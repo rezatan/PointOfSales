@@ -1,12 +1,12 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-@lang('app.product.product')
+@lang('app.product')
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">@lang('app.product.product')</li>
+    <li class="breadcrumb-item active">@lang('app.product')</li>
 @endsection
 
 @section('content')
@@ -17,6 +17,7 @@
             <div class="card-header with-border">
                 <button onclick="addForm('{{ route('product.store') }}')" class="btn btn-success btn-sm "><i class="fa fa-plus-circle"></i> Tambah</button>
                 <button onclick="deleteSelected('{{ route('product.delete_selected') }}')" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Hapus</button>
+                <button onclick="cetakBarcode('{{ route('product.print_barcode') }}')" class="btn btn-info btn-sm btn-flat"><i class="fa fa-barcode"></i> Cetak Barcode</button>
             </div>
             <div class="card-body table-responsive">
                 <form action="" method="post" class="form-product">
@@ -107,6 +108,7 @@
             .done((response) => {
                 $('#modal-form [name=name]').val(response.name);
                 $('#modal-form [name=category_id]').val(response.category.id);
+                $('#modal-form [name=code]').val(response.code);
                 $('#modal-form [name=brand]').val(response.brand);
             })
             .fail((errors) => {
@@ -146,6 +148,21 @@
         } else {
             alert('Pilih data yang akan dihapus');
             return;
+        }
+    }
+
+    function cetakBarcode(url) {
+        if ($('input:checked').length < 1) {
+            alert('Pilih data yang akan dicetak');
+            return;
+        } else if ($('input:checked').length < 3) {
+            alert('Pilih minimal 3 data untuk dicetak');
+            return;
+        } else {
+            $('.form-product')
+                .attr('target', '_blank')
+                .attr('action', url)
+                .submit();
         }
     }
 

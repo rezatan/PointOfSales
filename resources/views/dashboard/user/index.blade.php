@@ -1,12 +1,12 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-    Daftar User
+    @lang('app.userlist')
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Supplier</li>
+    <li class="breadcrumb-item active">@lang('app.userlist')</li>
 @endsection
 
 @section('content')

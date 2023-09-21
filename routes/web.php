@@ -48,11 +48,11 @@ Route::middleware('auth')->group(function() {
         Route::resource('/category', CategoryController::class);
 
         Route::post('/product/delete-selected', [ProductController::class, 'deleteSelected'])->name('product.delete_selected');
+        Route::post('/product/print-barcode', [ProductController::class, 'printBarcode'])->name('product.print_barcode');
         Route::resource('/product', ProductController::class);
         
         Route::resource('/stock', StockController::class);
         Route::post('/stock/delete-selected', [StockController::class, 'deleteSelected'])->name('stock.delete_selected');
-        Route::post('/stock/print-barcode', [StockController::class, 'printBarcode'])->name('stock.print_barcode');
 
         Route::resource('/supplier', SupplierController::class);
         Route::resource('/expense', ExpenseController::class);

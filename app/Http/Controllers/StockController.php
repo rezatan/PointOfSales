@@ -118,17 +118,5 @@ class StockController extends Controller
 
         return response(null, 204);
     }
-    public function printBarcode(Request $request)
-    {
-        $datastock = array();
-        foreach ($request->stock_id as $id) {
-            $stock = Stock::find($id);
-            $datastock[] = $stock;
-        }
 
-        $no  = 1;
-        $pdf = PDF::loadView('dashboard.stock.barcode', compact('datastock', 'no'));
-        $pdf->setPaper('a4', 'potrait');
-        return $pdf->stream('product.pdf');
-    }
 }

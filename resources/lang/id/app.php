@@ -1,10 +1,5 @@
 <?php
 return [
-	"product" => [
-		"category" => "Kategori",
-		"product" => "Produk",
-		"stock" => "Stok",
-	],
 	"transaction" => [
 		"name" => "TRANSAKSI",
 		'cashier' => "Kasir",
@@ -30,4 +25,5 @@ return [
 	'category' => "Kategori",
 	"product" => "Produk",
 	"stock" => "Stok",
+	'userlist' => 'Daftar User',
 ];

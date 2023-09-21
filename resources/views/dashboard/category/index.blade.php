@@ -1,12 +1,12 @@
 @extends('dashboard.layouts.main')
 
 @section('title')
-@lang('app.product.category')
+@lang('app.category')
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">@lang('app.product.category')</li>
+    <li class="breadcrumb-item active">@lang('app.category')</li>
 @endsection
 
 @section('content')
