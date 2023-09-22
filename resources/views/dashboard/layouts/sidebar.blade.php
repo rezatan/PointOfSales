@@ -121,7 +121,7 @@
 
           <li class="nav-header">@lang('app.setting.name')</li>
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/shopdetail" class="nav-link">
               <i class="nav-icon fas fa-store-alt"></i>
               <p>@lang('app.setting.shop')</p>
             </a>

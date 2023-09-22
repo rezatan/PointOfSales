@@ -65,7 +65,8 @@ Route::middleware('auth')->group(function() {
         Route::resource('/purchase_detail', PurchaseDetailsController::class)->except('create', 'show', 'edit');
         
         Route::resource('/shop', ShopController::class);
-        
+        Route::get('/shopdetail', [ShopController::class, 'detail']);
+
         Route::resource('/users', UserController::class);
 
         Route::post('/member/cetak-member', [MemberController::class, 'cetakMember'])->name('member.cetak_member');

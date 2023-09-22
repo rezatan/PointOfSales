@@ -143,4 +143,9 @@ class ShopController extends Controller
             ->make(true);
     }
 
+    public function detail()
+    {
+        return view('dashboard.shop.detail');
+    }
+
 }

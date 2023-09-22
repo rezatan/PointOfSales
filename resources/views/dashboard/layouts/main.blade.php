@@ -23,7 +23,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__wobble" src="{{ asset($shop->logo_path) }}" alt="AdminLTELogo" height="100" width="100">
   </div>
 
   <!-- Navbar -->
@@ -85,7 +85,7 @@
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
 
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
+{{-- <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 
 <!-- DataTables -->
