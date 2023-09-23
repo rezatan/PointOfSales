@@ -65,7 +65,6 @@ Route::middleware('auth')->group(function() {
         Route::resource('/purchase_detail', PurchaseDetailsController::class)->except('create', 'show', 'edit');
         
         Route::resource('/shop', ShopController::class);
-        Route::get('/shopdetail', [ShopController::class, 'detail']);
 
         Route::resource('/users', UserController::class);
 
@@ -95,5 +94,8 @@ Route::middleware('auth')->group(function() {
         
         Route::get('/profile', [UserController::class, 'profile']);
         Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
+        
+        Route::get('/shopdetail', [ShopController::class, 'detail']);
+
     });
 });
