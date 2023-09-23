@@ -118,7 +118,7 @@ class PurchaseController extends Controller
 
     public function data()
     {
-        $purchase = Purchase::where('total_price', '>', 0)->orderBy('id', 'desc')->get();
+        $purchase = Purchase::where('total_price', '>', 0)->latest()->get();
 
         return datatables()
             ->of($purchase)

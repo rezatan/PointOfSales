@@ -77,7 +77,7 @@ class ExpenseController extends Controller
 
     public function data()
     {
-        $expense = Expense::orderBy('id', 'desc')->get();
+        $expense = Expense::latest()->get();
 
         return datatables()
             ->of($expense)

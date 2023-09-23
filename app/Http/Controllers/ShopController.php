@@ -122,7 +122,7 @@ class ShopController extends Controller
 
     public function data()
     {
-        $shop = Shop::orderBy('name', 'asc')->get();
+        $shop = Shop::latest()->get();
         return Datatables::of($shop)
             ->addIndexColumn()
             ->addColumn('logo_path', function ($shop) {

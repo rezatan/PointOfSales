@@ -105,7 +105,7 @@ class MemberController extends Controller
 
     public function data()
     {
-        $member = Member::orderBy('code')->get();
+        $member = Member::latest()->get();
 
         return datatables()
             ->of($member)

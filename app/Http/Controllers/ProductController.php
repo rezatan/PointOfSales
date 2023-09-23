@@ -85,7 +85,7 @@ class ProductController extends Controller
 
     public function data()
     {
-        $product = Product::orderBy('created_at', 'asc')->get();
+        $product = Product::latest()->get();
         return datatables()
             ->of($product)
             ->addIndexColumn()

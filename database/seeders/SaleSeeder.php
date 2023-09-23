@@ -18,7 +18,7 @@ class SaleSeeder extends Seeder
             $cashier = Cashier::where('sale_id', $i)->get();
             $tqty = $cashier->sum('qty');
             $tprice = $cashier->sum('subtotal');
-            $date = fake()->dateTimeBetween('-4 week', '+4 week');
+            $date = fake()->dateTimeBetween('-4 week');
             Sale::factory()->create([
                 'member_id' => null,
                 'user_id' =>fake()->numberBetween(1, 2) ,

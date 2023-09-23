@@ -168,7 +168,7 @@ class SaleController extends Controller
 
     public function data()
     {
-        $penjualan = Sale::where('bill', '>', 0)->orderBy('id', 'desc')->get();
+        $penjualan = Sale::where('bill', '>', 0)->latest()->get();
 
         return datatables()
             ->of($penjualan)

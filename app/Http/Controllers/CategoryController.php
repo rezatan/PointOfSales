@@ -82,7 +82,7 @@ class CategoryController extends Controller
 
     public function data()
     {
-        $category = Category::orderBy('name', 'asc')->get();
+        $category = Category::latest()->get();
         return Datatables::of($category)
             ->addIndexColumn()
             ->addColumn('aksi', function ($category) {

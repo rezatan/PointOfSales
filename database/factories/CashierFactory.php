@@ -26,7 +26,7 @@ class CashierFactory extends Factory
         if($disc !=0){
             $subtotal = $subtotal - ($subtotal * $disc / 100);
         }
-        $date = fake()->dateTimeBetween('-4 week', '+4 week');
+        $date = fake()->dateTimeBetween('-4 week');
         $stock->qty -= $qty;
         $stock->save();
         return [

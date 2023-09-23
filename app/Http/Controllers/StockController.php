@@ -83,7 +83,7 @@ class StockController extends Controller
     }
     public function data()
     {
-        $stock = Stock::orderBy('created_at', 'desc')->get();
+        $stock = Stock::latest()->get();
         return datatables()
             ->of($stock)
             ->addIndexColumn()
